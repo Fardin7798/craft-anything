@@ -101,8 +101,8 @@ pub fn show(app: &mut CraftApp, ctx: &egui::Context) {
         p.selected = p.selected.saturating_sub(1);
     }
     p.selected = p.selected.min(n.saturating_sub(1));
-    // The list follows the selection only when the keys or typing moved it: every frame would pull
-    // the wheel's scroll back to it (#584).
+    // Bring the highlighted row into view only when it moved (arrow keys, or a new query put the
+    // best match first). Doing it every frame pulled the list back whenever it was scrolled (#584).
     let mut follow = down || up;
     let mut chosen: Option<usize> = None;
     let screen = ctx.content_rect();
